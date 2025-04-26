@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+<div
+  class="container d-flex flex-column justify-content-center align-items-center my-5"
+>
+  <h2 class="text-center mb-4">Zakończone przetargi</h2>
+
+  <% if (bids.length === 0) { %>
+  <div class="alert alert-info">Brak zakończonych przetargów</div>
+  <% } else { %>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>Tytuł</th>
+          <th>Instytucja</th>
+          <th>Data rozpoczęcia</th>
+          <th>Data zakończenia</th>
+          <th>Wynik</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bids.forEach((bid, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td>
+            <a href="/bids/<%= bid.id %>" class="text-decoration-none">
+              <%= bid.title %>
+            </a>
+          </td>
+          <td><%= bid.institution %></td>
+          <td><%= new Date(bid.start).toLocaleString() %></td>
+          <td><%= new Date(bid.end).toLocaleString() %></td>
+          <td>
+            <% if (bid.winner) { %> Wygrana: <%= bid.winner.bidder %> (<%=
+            bid.winner.amount %> PLN) <% } else if (bid.unsuccessful) { %>
+            <span class="text-danger">Przetarg bez rozstrzygnięcia</span>
+            <% } else { %> Brak ofert <% } %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</div>

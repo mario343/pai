@@ -1,0 +1,17 @@
+nav.navbar .navbar-nav {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding-left: 3rem;
+}
+
+nav.navbar .navbar-nav .nav-link {
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+  position: relative;
+}
+
+nav.navbar .navbar-nav .nav-link:hover {
+  color: white !important;
+  text-decoration: underline;
+}

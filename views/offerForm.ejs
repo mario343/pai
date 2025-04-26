@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+<div class="container d-flex flex-column align-items-center my-5">
+  <div class="text-center" style="max-width: 600px">
+    <h2 class="mb-4">Złóż ofertę dla: <%= bid.title %></h2>
+
+    <% const now = new Date(); %> <% const startDate = new Date(bid.start_date);
+    %> <% const endDate = new Date(bid.end_date); %> <% if (now < startDate) {
+    %>
+    <div class="alert alert-warning">
+      Przetarg nie został jeszcze otwarty. Data rozpoczęcia: <%=
+      bid.start_date.toLocaleString() %>
+    </div>
+    <% } else if (now > endDate) { %>
+    <div class="alert alert-danger">
+      Przetarg został już zamknięty. Data zakończenia: <%=
+      bid.end_date.toLocaleString() %>
+    </div>
+    <% } else { %>
+    <form method="POST" class="w-100 needs-validation" novalidate>
+      <div class="mb-3">
+        <label class="form-label">Nazwa oferenta</label>
+        <input
+          name="bidder"
+          class="form-control"
+          required
+          pattern="[A-Za-z0-9\s\-_,\.;:()]+"
+        />
+        <div class="invalid-feedback">
+          Nazwa oferenta jest wymagana i może zawierać tylko litery, cyfry i
+          podstawowe znaki specjalne
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Wartość oferty (PLN)</label>
+        <input
+          type="number"
+          step="0.01"
+          min="0.01"
+          name="amount"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">
+          Wartość oferty jest wymagana i musi być dodatnią liczbą
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success px-4 py-2">
+          Złóż ofertę
+        </button>
+      </div>
+    </form>
+    <% } %>
+  </div>
+</div>
+<script src="/js/offerFormValidation.js"></script>

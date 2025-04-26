@@ -1,0 +1,101 @@
+<%- include('partials/header') %>
+
+<div class="container d-flex flex-column align-items-center my-5">
+  <h2 class="text-center mb-4">Dodaj przetarg</h2>
+
+  <form
+    method="POST"
+    onsubmit="return validateForm()"
+    class="w-100"
+    style="max-width: 600px"
+    novalidate
+  >
+    <div class="mb-3">
+      <label class="form-label">Tytuł</label>
+      <input
+        name="title"
+        class="form-control"
+        required
+        pattern="[A-Za-z0-9\s\-_,\.;:()]+"
+      />
+      <div class="invalid-feedback">
+        Tytuł jest wymagany i może zawierać tylko litery, cyfry i podstawowe
+        znaki specjalne
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Opis</label>
+      <textarea
+        name="description"
+        class="form-control"
+        rows="4"
+        required
+        pattern="[A-Za-z0-9\s\-_,\.;:()]+"
+      ></textarea>
+      <div class="invalid-feedback">
+        Opis jest wymagany i może zawierać tylko litery, cyfry i podstawowe
+        znaki specjalne
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Instytucja</label>
+      <input
+        name="institution"
+        class="form-control"
+        required
+        pattern="[A-Za-z0-9\s\-_,\.;:()]+"
+      />
+      <div class="invalid-feedback">
+        Nazwa instytucji jest wymagana i może zawierać tylko litery, cyfry i
+        podstawowe znaki specjalne
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <label class="form-label">Start</label>
+        <input
+          type="datetime-local"
+          name="start"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">
+          Data rozpoczęcia jest wymagana i musi być w przyszłości
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Koniec</label>
+        <input type="datetime-local" name="end" class="form-control" required />
+        <div class="invalid-feedback">
+          Data zakończenia jest wymagana i musi być późniejsza niż data
+          rozpoczęcia
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Budżet maksymalny (PLN)</label>
+      <input
+        type="number"
+        step="0.01"
+        min="0.01"
+        name="max_budget"
+        class="form-control"
+        required
+      />
+      <div class="invalid-feedback">
+        Budżet jest wymagany i musi być dodatnią liczbą
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary px-4">Dodaj</button>
+    </div>
+  </form>
+</div>
+
+<script src="/js/addBidValidation.js"></script>

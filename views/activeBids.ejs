@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+<div
+  class="container d-flex flex-column justify-content-center align-items-center my-5"
+>
+  <h2 class="text-center mb-4">Aktywne przetargi</h2>
+
+  <% if (bids.length === 0) { %>
+  <div class="alert alert-info">Brak aktywnych przetargów</div>
+  <% } else { %>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>Tytuł</th>
+          <th>Instytucja</th>
+          <th>Od</th>
+          <th>Do</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bids.forEach((bid, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td>
+            <a href="/bids/<%= bid.id %>" class="text-decoration-none">
+              <%= bid.title %>
+            </a>
+          </td>
+          <td><%= bid.institution %></td>
+          <td><%= new Date(bid.start).toLocaleString() %></td>
+          <td><%= new Date(bid.end).toLocaleString() %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</div>
